@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/frag_main">
+
+    <fragment
+        android:id="@+id/frag_main"
+        android:name="com.secondhands.navigationexamproject.ui.MainFragment"
+        android:label="Main Page"
+        tools:layout="@layout/main_fragment">
+    </fragment>
+
+    <fragment
+        android:id="@+id/frag_list"
+        android:name="com.secondhands.navigationexamproject.ui.ListFragment"
+        android:label="List Page"
+        tools:layout="@layout/list_fragment">
+    </fragment>
+
+    <fragment
+        android:id="@+id/frag_detail"
+        android:name="com.secondhands.navigationexamproject.ui.DetailFragment"
+        android:label="Detail Page"
+        tools:layout="@layout/detail_fragment">
+    </fragment>
+
+    <action android:id="@+id/action_global_frag_main" app:destination="@id/frag_main"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim"
+        app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+        app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    <action android:id="@+id/action_global_frag_list" app:destination="@id/frag_list"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim"
+        app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+        app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    <action android:id="@+id/action_global_frag_detail" app:destination="@id/frag_detail"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim"
+        app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+        app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
+</navigation>
