@@ -10,6 +10,7 @@ import androidx.navigation.Navigation
 
 import com.secondhands.navigationexamproject.R
 import com.secondhands.navigationexamproject.databinding.MainFragmentBinding
+import kotlinx.android.synthetic.main.main_fragment.*
 
 class MainFragment : Fragment() {
 
@@ -30,8 +31,14 @@ class MainFragment : Fragment() {
             viewmodel = mainViewModel
         }
 
+        // Go to list fragment
         viewDataBinding.btnCta.setOnClickListener {
             Navigation.findNavController(viewDataBinding.root).navigate(R.id.action_global_frag_list)
+        }
+
+        // Go to camera fragment
+        viewDataBinding.btnCtaCamera.setOnClickListener {
+            Navigation.findNavController(viewDataBinding.root).navigate(R.id.action_frag_main_to_cameraFragment)
         }
 
         return viewDataBinding.root

@@ -32,7 +32,7 @@ class ListFragment : Fragment() {
         }
 
         val navController =  Navigation.findNavController(viewDataBinding.root)
-        val appBarConfiguration = AppBarConfiguration(navController.graph)
+//        val appBarConfiguration = AppBarConfiguration(navController.graph)
 
         viewDataBinding.btnCta.setOnClickListener {
             navController.navigate(R.id.action_global_frag_detail)
