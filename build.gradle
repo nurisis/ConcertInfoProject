@@ -32,4 +32,5 @@ task clean(type: Delete) {
 ext {
     nav_version = '2.1.0'
     koin_version = '2.0.1'
+    retrofit_version = '2.6.2'
 }

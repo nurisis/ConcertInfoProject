@@ -2,15 +2,19 @@ package com.secondhands.navigationexamproject.ui
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import androidx.navigation.ui.AppBarConfiguration
 
 import com.secondhands.navigationexamproject.R
 import com.secondhands.navigationexamproject.databinding.ListFragmentBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ListFragment : Fragment() {
 
@@ -18,7 +22,7 @@ class ListFragment : Fragment() {
         fun newInstance() = ListFragment()
     }
 
-    private lateinit var listViewModel: ListViewModel
+    private val listViewModel: ListViewModel by viewModel()
     private lateinit var viewDataBinding : ListFragmentBinding
 
     override fun onCreateView(
@@ -26,7 +30,7 @@ class ListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        listViewModel = ViewModelProviders.of(this).get(ListViewModel::class.java)
+//        listViewModel = ViewModelProviders.of(this).get(ListViewModel::class.java)
         viewDataBinding = ListFragmentBinding.inflate(inflater, container, false).apply {
             viewmodel = listViewModel
         }
@@ -43,8 +47,18 @@ class ListFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        listViewModel = ViewModelProviders.of(this).get(ListViewModel::class.java)
-        // TODO: Use the ViewModel
+
+        viewDataBinding.lifecycleOwner = viewLifecycleOwner
+
+        listViewModel.concertLists.observe(this, Observer {
+            Log.d("LOG>>", it.toString())
+        })
+
+        listViewModel.toastText.observe(this, Observer {
+            Toast.makeText(activity!!, it, Toast.LENGTH_LONG).show()
+        })
+
+        listViewModel.loadConcerts()
     }
 
 }
