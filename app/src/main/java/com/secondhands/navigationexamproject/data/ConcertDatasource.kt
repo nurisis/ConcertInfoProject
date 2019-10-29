@@ -9,7 +9,6 @@ import retrofit2.http.Query
 interface ConcertDatasource {
 
     @GET("/openapi/rest/publicperformancedisplays/realm")
-    @Headers("Content-type: application/json")
     fun getConcerts(@Query("serviceKey") serviceKey: String
                     , @Query("sortStdr") sortStdr:Int = 1
                     , @Query("realmCode") realmCode: String

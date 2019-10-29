@@ -29,15 +29,16 @@ class ListViewModel(
         _dataLoading.value = true
 
         viewModelScope.launch {
-            val concertsResult = getConcertsUseCase()
+            val concertsResult = getConcertsUseCase.invoke()
 
-            if(concertsResult is Result.Success){
-                _concertLists.value = concertsResult.data
-            }
-            else {
-                _concertLists.value = emptyList()
-                _toastText.value = "An error occurred while retrieving the data\uD83E\uDD76"
-            }
+//            if(concertsResult is Result.Success){
+//                _concertLists.value = concertsResult.data
+//                Log.d("LOG>>", "data : ${concertsResult.data}")
+//            }
+//            else {
+//                _concertLists.value = emptyList()
+//                _toastText.value = "An error occurred while retrieving the data\uD83E\uDD76"
+//            }
 
             _dataLoading.value = false
         }
