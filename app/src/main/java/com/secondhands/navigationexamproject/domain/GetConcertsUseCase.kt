@@ -3,6 +3,8 @@ package com.secondhands.navigationexamproject.domain
 import android.util.Log
 import com.secondhands.navigationexamproject.data.ConcertRepository
 import com.secondhands.navigationexamproject.data.Result
+import com.secondhands.navigationexamproject.entity.ApiMsgBody
+import com.secondhands.navigationexamproject.entity.ApiResponse
 import com.secondhands.navigationexamproject.entity.ConcertItem
 import io.reactivex.schedulers.Schedulers
 import java.lang.Exception
@@ -10,7 +12,7 @@ import java.lang.Exception
 class GetConcertsUseCase(
     private val concertRepository: ConcertRepository
 ) {
-    lateinit var result: Result<List<ConcertItem>>
+    lateinit var result: Result<ApiMsgBody>
     suspend operator fun invoke() {
         val concertsResult = concertRepository.getConcerts()
 
