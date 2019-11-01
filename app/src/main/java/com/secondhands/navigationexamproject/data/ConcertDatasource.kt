@@ -1,9 +1,9 @@
 package com.secondhands.navigationexamproject.data
 
-import com.secondhands.navigationexamproject.entity.ApiMsgBody
 import com.secondhands.navigationexamproject.entity.ApiResponse
-import com.secondhands.navigationexamproject.entity.ConcertItem
 import io.reactivex.Single
+import okhttp3.ResponseBody
+import retrofit2.Call
 import retrofit2.http.*
 
 interface ConcertDatasource {
@@ -17,6 +17,6 @@ interface ConcertDatasource {
                     , @Query("rows") rows:String
                     , @Query("sido", encoded = true) sido:String
 //    ): Single<List<ConcertItem>>
-    ): Single<ApiMsgBody>
+    ): Single<ApiResponse>
 
 }

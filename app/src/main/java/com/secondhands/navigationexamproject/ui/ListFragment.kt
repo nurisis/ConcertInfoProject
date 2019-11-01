@@ -50,7 +50,7 @@ class ListFragment : Fragment() {
 
         viewDataBinding.lifecycleOwner = viewLifecycleOwner
 
-        listViewModel.concertLists.observe(this, Observer {
+        listViewModel.concertResponse.observe(this, Observer {
             Log.d("LOG>>", it.toString())
         })
 

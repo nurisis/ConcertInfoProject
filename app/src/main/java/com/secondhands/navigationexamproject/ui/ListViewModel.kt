@@ -2,17 +2,16 @@ package com.secondhands.navigationexamproject.ui
 
 import android.util.Log
 import androidx.lifecycle.*
-import com.secondhands.navigationexamproject.data.Result
 import com.secondhands.navigationexamproject.domain.GetConcertsUseCase
-import com.secondhands.navigationexamproject.entity.ConcertItem
+import com.secondhands.navigationexamproject.entity.ApiResponse
 import kotlinx.coroutines.launch
 
 class ListViewModel(
     private val getConcertsUseCase: GetConcertsUseCase
 ) : ViewModel() {
 
-    private val _concertLists = MutableLiveData<List<ConcertItem>>().apply { value = emptyList() }
-    val concertLists: LiveData<List<ConcertItem>> = _concertLists
+    private val _concertResponse = MutableLiveData<ApiResponse>()
+    val concertResponse: LiveData<ApiResponse> = _concertResponse
 
     private val _dataLoading = MutableLiveData<Boolean>()
     val dataLoading: LiveData<Boolean> = _dataLoading
