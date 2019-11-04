@@ -16,7 +16,6 @@ interface ConcertDatasource {
                     , @Query("cPage") cPage:String
                     , @Query("rows") rows:String
                     , @Query("sido", encoded = true) sido:String
-//    ): Single<List<ConcertItem>>
     ): Single<ApiResponse>
 
 }

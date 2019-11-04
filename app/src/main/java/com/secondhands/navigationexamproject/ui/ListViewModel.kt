@@ -4,15 +4,19 @@ import android.util.Log
 import androidx.lifecycle.*
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
+import com.secondhands.navigationexamproject.data.ConcertDataSourceFactory
+import com.secondhands.navigationexamproject.data.ConcertDatasource
 import com.secondhands.navigationexamproject.domain.GetConcertsUseCase
 import com.secondhands.navigationexamproject.entity.ApiResponse
 import com.secondhands.navigationexamproject.entity.ConcertItem
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.launch
 
 class ListViewModel(
-    private val getConcertsUseCase: GetConcertsUseCase
+    private val getConcertsUseCase: GetConcertsUseCase,
+    private val concertDatasource: ConcertDatasource
 ) : ViewModel() {
 
     private val _concertResponse = MutableLiveData<ApiResponse>()
@@ -29,6 +33,15 @@ class ListViewModel(
     private val _toastText = MutableLiveData<String>()
     val toastText: LiveData<String> = _toastText
 
+    private val _realmCode = MutableLiveData<String>()
+    val realmCode: LiveData<String> = _realmCode
+
+    private val _sido = MutableLiveData<String>()
+    val sido: LiveData<String> = _sido
+
+    private val compositeDisposable = CompositeDisposable()
+    private val dataSourceFactory:ConcertDataSourceFactory
+
     init {
         // Configuration of paging
         val config = PagedList.Config.Builder()
@@ -38,9 +51,10 @@ class ListViewModel(
             .setEnablePlaceholders(true)
             .build()
 
-        conCertLiveData = LivePagedListBuilder(recentDataSourceFactory, config).build()
+        dataSourceFactory = ConcertDataSourceFactory(compositeDisposable, concertDatasource, realmCode.value ?: "B000", sido.value ?: "서울")
+        conCertLiveData = LivePagedListBuilder(dataSourceFactory, config).build()
 
-        loadConcerts()
+//        loadConcerts()
     }
 
     fun loadConcerts() {

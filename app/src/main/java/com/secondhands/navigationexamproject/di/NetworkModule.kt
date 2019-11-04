@@ -6,12 +6,9 @@ import com.secondhands.navigationexamproject.data.ConcertRepository
 import com.secondhands.navigationexamproject.data.ConcertRepositoryImpl
 import com.secondhands.navigationexamproject.domain.GetConcertsUseCase
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory
 import java.util.concurrent.TimeUnit
 
@@ -22,11 +19,12 @@ val netWorkModule = module {
         createWebService<ConcertDatasource>(get(), "http://www.culture.go.kr")
     }
 
-    factory {
+    single {
         ConcertRepositoryImpl(get()) as ConcertRepository
     }
 
-    factory { GetConcertsUseCase(get()) }
+    single { GetConcertsUseCase(get()) }
+
 
 //    single {
 //        GsonBuilder().create()
@@ -45,13 +43,13 @@ val netWorkModule = module {
 
 
 fun createOkHttp() : OkHttpClient {
-    val httpLoggingInterceptor = HttpLoggingInterceptor()
-    httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BASIC
+//    val httpLoggingInterceptor = HttpLoggingInterceptor()
+//    httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BASIC
 
     return OkHttpClient.Builder()
         .connectTimeout(60L, TimeUnit.SECONDS)
         .readTimeout(60L, TimeUnit.SECONDS)
-        .addInterceptor(httpLoggingInterceptor)
+//        .addInterceptor(httpLoggingInterceptor)
         .build()
 }
 

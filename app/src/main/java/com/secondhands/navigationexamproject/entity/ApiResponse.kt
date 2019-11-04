@@ -29,7 +29,7 @@ data class ApiBody(
     @field:Element(name = "sortStdr")
     var sortStdr: Int =0,
 
-    @field:ElementList(name = "perforList", inline = true)
+    @field:ElementList(name = "perforList", inline = true, required = false)
     var perforList: List<ConcertItem> = mutableListOf()
 )
 
