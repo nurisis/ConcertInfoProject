@@ -36,11 +36,6 @@ class MainFragment : Fragment() {
             Navigation.findNavController(viewDataBinding.root).navigate(R.id.action_global_frag_list)
         }
 
-        // Go to camera fragment
-        viewDataBinding.btnCtaCamera.setOnClickListener {
-            Navigation.findNavController(viewDataBinding.root).navigate(R.id.action_frag_main_to_cameraFragment)
-        }
-
         return viewDataBinding.root
     }
 

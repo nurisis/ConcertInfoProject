@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.secondhands.navigationexamproject.ui.ListViewModel" />
+    </data>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:padding="16dp"
+    tools:context=".ui.ListFragment">
+
+    <TextView
+        android:id="@+id/tv_numOfLists"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text='@{"Total : "+viewmodel.concertResponse.apiBody.totalCount}'
+        tools:text="Total : 100"
+        android:textStyle="bold"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_concerts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_below="@id/tv_numOfLists"/>
+
+</RelativeLayout>
+</layout>

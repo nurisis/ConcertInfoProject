@@ -3,6 +3,7 @@ package com.secondhands.navigationexamproject.entity
 import org.simpleframework.xml.Element
 import org.simpleframework.xml.Root
 import org.simpleframework.xml.ElementList
+import java.io.Serializable
 
 
 @Root(name = "response", strict = false)
@@ -29,14 +30,22 @@ data class ApiBody(
     var sortStdr: Int =0,
 
     @field:ElementList(name = "perforList", inline = true)
-    var perforList: List<PerforList> = mutableListOf()
+    var perforList: List<ConcertItem> = mutableListOf()
 )
 
 @Root(name = "perforList", strict = false)
-data class PerforList(
+data class ConcertItem(
     @field:Element(name = "title")
     var title:String = "",
     @field:Element(name = "place")
-    var place:String = ""
-)
+    var place:String = "",
+    @field:Element(name = "thumbnail")
+    var thumbnail:String = "",
+    @field:Element(name = "startDate")
+    var startDate:String = "",
+    @field:Element(name = "endDate")
+    var endDate:String = "",
+    @field:Element(name = "area")
+    var area:String = ""
+) : Serializable
 

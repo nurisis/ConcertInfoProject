@@ -1,6 +1,7 @@
 package com.secondhands.navigationexamproject
 
 import android.app.Application
+import com.secondhands.navigationexamproject.di.appModule
 import com.secondhands.navigationexamproject.di.netWorkModule
 import com.secondhands.navigationexamproject.di.viewModelModule
 import org.koin.core.context.startKoin
@@ -12,7 +13,7 @@ class MyApp : Application() {
 
         startKoin {
             this@MyApp
-            modules(listOf(viewModelModule, netWorkModule))
+            modules(listOf(viewModelModule, netWorkModule, appModule))
         }
     }
 }

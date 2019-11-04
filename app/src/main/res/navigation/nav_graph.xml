@@ -10,14 +10,20 @@
         android:name="com.secondhands.navigationexamproject.ui.MainFragment"
         android:label="Main Page"
         tools:layout="@layout/main_fragment">
-        <action android:id="@+id/action_frag_main_to_cameraFragment" app:destination="@id/frag_camera"/>
     </fragment>
 
     <fragment
         android:id="@+id/frag_list"
         android:name="com.secondhands.navigationexamproject.ui.ListFragment"
         android:label="List Page"
-        tools:layout="@layout/list_fragment">
+        tools:layout="@layout/fragment_concert_list">
+        <action
+            android:id="@+id/action_frag_list_to_concertDetailFragment"
+            app:destination="@id/concertDetailFragment" >
+            <argument
+                android:name="item"
+                app:argType="com.secondhands.navigationexamproject.entity.ConcertItem" />
+        </action>
     </fragment>
 
     <fragment
@@ -43,7 +49,13 @@
         app:popEnterAnim="@anim/nav_default_pop_enter_anim"
         app:popExitAnim="@anim/nav_default_pop_exit_anim" />
 
-    <fragment android:id="@+id/frag_camera" android:name="com.secondhands.navigationexamproject.ui.CameraFragment"
-              android:label="Camera page" tools:layout = "@layout/camera_fragment"/>
+    <fragment
+        android:id="@+id/concertDetailFragment"
+        android:name="com.secondhands.navigationexamproject.ui.ConcertDetailFragment"
+        android:label="ConcertDetailFragment" >
+        <argument
+            android:name="item"
+            app:argType="com.secondhands.navigationexamproject.entity.ConcertItem" />
+    </fragment>
 
 </navigation>
