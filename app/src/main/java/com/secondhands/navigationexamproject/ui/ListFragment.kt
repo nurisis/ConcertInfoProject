@@ -6,7 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.secondhands.android.home.ui.ConcertListAdapter
 
@@ -33,9 +37,6 @@ class ListFragment : Fragment() {
             viewmodel = listViewModel
         }
 
-//        val navController =  Navigation.findNavController(viewDataBinding.root)
-//        val appBarConfiguration = AppBarConfiguration(navController.graph)
-
         viewDataBinding.rvConcerts.apply {
             adapter = listAdapter
             layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
@@ -50,7 +51,7 @@ class ListFragment : Fragment() {
 
         viewDataBinding.lifecycleOwner = viewLifecycleOwner
 
-        listViewModel.concertList.observe(viewLifecycleOwner, Observer {
+        listViewModel.conCertLiveData.observe(viewLifecycleOwner, Observer {
             listAdapter.submitList(it)
         })
 

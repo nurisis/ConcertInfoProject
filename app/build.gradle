@@ -25,6 +25,15 @@ android {
         enabled = true
         enabledForTests = true
     }
+
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }
 
 dependencies {
@@ -75,4 +84,6 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
     implementation 'io.reactivex.rxjava2:rxjava:2.2.10'
 
+    // Paging
+    implementation "androidx.paging:paging-runtime:$paging_version"
 }

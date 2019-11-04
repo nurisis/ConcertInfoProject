@@ -2,6 +2,8 @@ package com.secondhands.navigationexamproject.ui
 
 import android.util.Log
 import androidx.lifecycle.*
+import androidx.paging.LivePagedListBuilder
+import androidx.paging.PagedList
 import com.secondhands.navigationexamproject.domain.GetConcertsUseCase
 import com.secondhands.navigationexamproject.entity.ApiResponse
 import com.secondhands.navigationexamproject.entity.ConcertItem
@@ -19,6 +21,8 @@ class ListViewModel(
     private val _concertList = MutableLiveData<List<ConcertItem>>()
     val concertList: LiveData<List<ConcertItem>> = _concertList
 
+    val conCertLiveData: LiveData<PagedList<ConcertItem>>
+
     private val _dataLoading = MutableLiveData<Boolean>()
     val dataLoading: LiveData<Boolean> = _dataLoading
 
@@ -26,6 +30,16 @@ class ListViewModel(
     val toastText: LiveData<String> = _toastText
 
     init {
+        // Configuration of paging
+        val config = PagedList.Config.Builder()
+            .setInitialLoadSizeHint(20)
+            .setPrefetchDistance(20)
+            .setPageSize(20)
+            .setEnablePlaceholders(true)
+            .build()
+
+        conCertLiveData = LivePagedListBuilder(recentDataSourceFactory, config).build()
+
         loadConcerts()
     }
 

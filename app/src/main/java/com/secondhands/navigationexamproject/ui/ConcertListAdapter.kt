@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
+import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -14,15 +15,16 @@ import com.secondhands.navigationexamproject.databinding.ItemConcertListBinding
 import com.secondhands.navigationexamproject.entity.ConcertItem
 import com.secondhands.navigationexamproject.ui.ListViewModel
 
-class ConcertListAdapter(private val viewModel: ListViewModel) : ListAdapter<ConcertItem, ConcertListAdapter.ViewHolder>(MyPageDiffCallback()) {
+class ConcertListAdapter(private val viewModel: ListViewModel) : PagedListAdapter<ConcertItem, ConcertListAdapter.ViewHolder>(MyPageDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.from(parent, viewModel)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = getItem(position)
-        holder.bind(item)
+        getItem(position)?.let {
+            holder.bind(it)
+        }
     }
 
     class ViewHolder private constructor(val binding: ItemConcertListBinding, private val viewModel: ListViewModel) : RecyclerView.ViewHolder(binding.root), View.OnClickListener {
