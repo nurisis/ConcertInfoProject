@@ -7,27 +7,30 @@
 
     <fragment
         android:id="@+id/frag_main"
-        android:name="com.secondhands.navigationexamproject.ui.MainFragment"
+        android:name="com.secondhands.concertinfoproject.ui.MainFragment"
         android:label="Main Page"
         tools:layout="@layout/main_fragment">
+        <action
+            android:id="@+id/action_frag_main_to_concertDetailFragment"
+            app:destination="@id/concertDetailFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
 
     <fragment
         android:id="@+id/frag_list"
-        android:name="com.secondhands.navigationexamproject.ui.ListFragment"
+        android:name="com.secondhands.concertinfoproject.ui.ConcertListFragment"
         android:label="List Page"
         tools:layout="@layout/fragment_concert_list">
         <action
             android:id="@+id/action_frag_list_to_concertDetailFragment"
-            app:destination="@id/concertDetailFragment" >
-        </action>
-    </fragment>
-
-    <fragment
-        android:id="@+id/frag_detail"
-        android:name="com.secondhands.navigationexamproject.ui.DetailFragment"
-        android:label="Detail Page"
-        tools:layout="@layout/detail_fragment">
+            app:destination="@id/concertDetailFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"></action>
     </fragment>
 
     <action android:id="@+id/action_global_frag_main" app:destination="@id/frag_main"
@@ -40,15 +43,11 @@
         app:exitAnim="@anim/nav_default_exit_anim"
         app:popEnterAnim="@anim/nav_default_pop_enter_anim"
         app:popExitAnim="@anim/nav_default_pop_exit_anim" />
-    <action android:id="@+id/action_global_frag_detail" app:destination="@id/frag_detail"
-        app:enterAnim="@anim/nav_default_enter_anim"
-        app:exitAnim="@anim/nav_default_exit_anim"
-        app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-        app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
 
     <fragment
         android:id="@+id/concertDetailFragment"
-        android:name="com.secondhands.navigationexamproject.ui.ConcertDetailFragment"
+        android:name="com.secondhands.concertinfoproject.ui.ConcertDetailFragment"
         android:label="ConcertDetailFragment" >
     </fragment>
 

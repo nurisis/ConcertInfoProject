@@ -61,17 +61,17 @@ dependencies {
 
     // Koin for Kotlin
     implementation "org.koin:koin-core:$koin_version"
+    // Koin AndroidX ViewModel features
+    implementation "org.koin:koin-androidx-viewmodel:$koin_version"
+    // Koin for Android
+//    implementation "org.koin:koin-android:$koin_version"
 //    // Koin for Unit tests
 //    testImplementation "org.koin:koin-test:$koin_version"
 //    // Koin for Java developers
 //    implementation "org.koin:koin-java:$koin_version"
 
-    // Koin for Android
-    implementation "org.koin:koin-android:$koin_version"
     // Koin AndroidX Scope features
 //    implementation "org.koin:koin-androidx-scope:$koin_version"
-    // Koin AndroidX ViewModel features
-    implementation "org.koin:koin-androidx-viewmodel:$koin_version"
 
     // retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
@@ -83,8 +83,8 @@ dependencies {
 //    implementation "com.squareup.okhttp3:logging-interceptor:3.8.1"
 
     // Rxjava
-    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
-    implementation 'io.reactivex.rxjava2:rxjava:2.2.10'
+//    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+//    implementation 'io.reactivex.rxjava2:rxjava:2.2.10'
 
     // Paging
     implementation "androidx.paging:paging-runtime:$paging_version"
