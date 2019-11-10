@@ -1,118 +1,48 @@
 package com.secondhands.navigationexamproject.data
 
-import android.util.Log
-import androidx.lifecycle.MutableLiveData
 import androidx.paging.DataSource
-import androidx.paging.PageKeyedDataSource
+import com.secondhands.navigationexamproject.data.local.ConcertLocalDataSource
+import com.secondhands.navigationexamproject.data.remote.ConcertApiSource
+import com.secondhands.navigationexamproject.data.remote.ConcertRemoteDataSource
 import com.secondhands.navigationexamproject.entity.ApiResponse
 import com.secondhands.navigationexamproject.entity.ConcertItem
 import io.reactivex.Single
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
-import java.text.SimpleDateFormat
-import java.util.*
+import kotlinx.coroutines.*
 
-interface ConcertRepository {
+class ConcertRepository(
+    private val concertRemoteDataSource: ConcertRemoteDataSource,
+    private val concertLocalDataSource: ConcertLocalDataSource,
+    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
+) : BaseDataSource() {
 
-    suspend fun getConcerts() : Single<ApiResponse>
-}
-
-const val SERVICE_KEY = "H2vKl%2BMCf8RlJBTobMych6%2F7GSO%2Byxez9WozIFxaHRDymKZOPFH2S1cKwFTlaxZfqkoO0SBE4YlBLy%2BWG9Rnfw%3D%3D"
-val START_DATE = SimpleDateFormat("yyyyMMdd").format(Date())
-
-
-class ConcertDataSourceFactory(
-    private val compositeDisposable: CompositeDisposable,
-    private val concertDatasource: ConcertDatasource,
-    private val realmCode:String,
-    private val sido:String
-)
-    : DataSource.Factory<Int, ConcertItem>() {
-
-    val datataSourceLiveData = MutableLiveData<ConcertRepositorySource>()
-
-    override fun create(): DataSource<Int, ConcertItem> {
-        val newsDataSource = ConcertRepositorySource(compositeDisposable, concertDatasource, realmCode, sido)
-        datataSourceLiveData.postValue(newsDataSource)
-        return newsDataSource
+    fun getAllBookMarks() : DataSource.Factory<Int, ConcertItem> {
+        return concertLocalDataSource.getAllBookMarks()
     }
-}
-
-class ConcertRepositorySource(
-    private val compositeDisposable: CompositeDisposable,
-    private val concertDatasource: ConcertDatasource,
-    private val realmCode:String,
-    private val sido:String
-) : PageKeyedDataSource<Int,ConcertItem>() {
-
-    private var cPage = 1
-
-    override fun loadInitial(
-        params: LoadInitialParams<Int>,
-        callback: LoadInitialCallback<Int, ConcertItem>
-    ) {
-        Log.d("LOG>>","Date : $START_DATE")
-        compositeDisposable.add(
-            concertDatasource.getConcerts(
-            SERVICE_KEY,
-            1,
-            realmCode,
-            START_DATE,
-            cPage.toString(),
-            "20",
-            sido
-            )
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                callback.onResult(it.apiBody.perforList, cPage, it.apiBody.perforList.size)
-                cPage++
-            },{
-                Log.e("LOG>>","Error : $it")
-            })
-        )
+    suspend fun getConcerts(): Result<ApiResponse> {
+        return withContext(ioDispatcher){
+            getResult { concertRemoteDataSource.getConcerts() }
+        }
     }
 
-    override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, ConcertItem>) {
-        compositeDisposable.add(
-            concertDatasource.getConcerts(
-                SERVICE_KEY,
-                1,
-                realmCode,
-                START_DATE,
-                cPage.toString(),
-                "20",
-                sido
-            )
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    callback.onResult(it.apiBody.perforList,cPage)
-                    cPage++
-                },{
-                    Log.e("LOG>>","Error2 : $it")
-                })
-        )
+    suspend fun getBookMark(title : String) : Result<ConcertItem> {
+        return withContext(ioDispatcher){
+            try {
+                Result.Success(concertLocalDataSource.getBookMark(title))
+            }catch (e:java.lang.Exception) {
+                Result.Error(Exception("Error on getting bookmark data from local."))
+            }
+        }
     }
 
-    override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, ConcertItem>) {
+    suspend fun saveBookMark(item: ConcertItem) {
+        coroutineScope {
+            launch { concertLocalDataSource.saveBookMark(item) }
+        }
     }
 
+    suspend fun deleteBookMark(item: ConcertItem) {
+        coroutineScope {
+            launch { concertLocalDataSource.deleteBookMark(item) }
+        }
+    }
 }
-
-class ConcertRepositoryImpl(private val concertDatasource: ConcertDatasource) : ConcertRepository {
-    final val SERVICE_KEY = "H2vKl%2BMCf8RlJBTobMych6%2F7GSO%2Byxez9WozIFxaHRDymKZOPFH2S1cKwFTlaxZfqkoO0SBE4YlBLy%2BWG9Rnfw%3D%3D"
-
-    override suspend fun getConcerts(): Single<ApiResponse> =
-        concertDatasource.getConcerts(
-            SERVICE_KEY
-            ,1
-            ,"B000"
-            ,"20191029"
-            ,"1"
-            ,"10"
-            ,"서울"
-        )
-}
-

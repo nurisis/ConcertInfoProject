@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="item"
+            type="com.secondhands.navigationexamproject.entity.ConcertItem" />
+    </data>
+
+<RelativeLayout
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    android:background="@drawable/bg_round_yellow_rectangle"
+    android:layout_margin="8dp"
+    android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/iv_concert"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp"
+        app:imagePath="@{item.thumbnail}"
+        app:pathError="@{ @drawable/ic_error_default }"
+        app:imageOption='@{"center"}'
+        tools:src="@color/colorDefault"/>
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_below="@id/iv_concert"
+        android:text="@{item.title}"
+        android:textStyle="bold"
+        tools:text="Title"/>
+
+</RelativeLayout>
+</layout>

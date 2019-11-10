@@ -30,8 +30,10 @@ fun loadImage(imageView: ImageView, @Nullable path:String?, errorDrawable: Drawa
 }
 
 @BindingAdapter("date")
-fun TextView.convertDate(rawDate:String) {
-    text = rawDate.substring(0,4) + "/" + rawDate.substring(4,6) + "/" + rawDate.substring(6)
+fun TextView.convertDate(rawDate:String?) {
+    text = rawDate?.let {
+        rawDate.substring(0,4) + "/" + rawDate.substring(4,6) + "/" + rawDate.substring(6)
+    } ?: ""
 }
 
 @BindingConversion

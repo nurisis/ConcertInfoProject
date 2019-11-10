@@ -10,6 +10,7 @@ import androidx.navigation.Navigation
 
 import com.secondhands.navigationexamproject.R
 import com.secondhands.navigationexamproject.databinding.DetailFragmentBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailFragment : Fragment() {
 

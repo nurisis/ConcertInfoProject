@@ -2,8 +2,8 @@
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
-            name="item"
-            type="com.secondhands.navigationexamproject.entity.ConcertItem" />
+            name="viewModel"
+            type="com.secondhands.navigationexamproject.ui.ListViewModel" />
     </data>
 <androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -24,19 +24,28 @@
         android:id="@+id/iv_concert"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:layout_marginBottom="36dp"
+        android:layout_marginBottom="24dp"
         android:scaleType="fitCenter"
-        app:imagePath="@{item.thumbnail}"
+        app:imagePath="@{viewModel.selectedConcertItem.thumbnail}"
         app:pathError="@{ @drawable/ic_error_default }"
         app:imageOption='@{"center"}'
         tools:src="@color/colorDefault"/>
+
+    <ImageView
+        android:id="@+id/iv_bookmark"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        tools:src="@drawable/ic_bookmark_inactive_24dp"
+        android:src="@{viewModel.isBookMarked().booleanValue() ? @drawable/ic_bookmark_active_24dp : @drawable/ic_bookmark_inactive_24dp}"
+        android:onClick="@{() -> viewModel.saveBookMark()}"
+        android:layout_gravity="end"/>
 
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
-        android:text="@{item.title}"
+        android:text="@{viewModel.selectedConcertItem.title}"
         tools:text="Title"
         android:textSize="20sp"
         android:textStyle="bold"/>
@@ -46,7 +55,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:text='@{"Area : " + item.area}'
+        android:text='@{"Area : " + viewModel.selectedConcertItem.area}'
         tools:text="Area : "
         android:textSize="16sp"/>
 
@@ -55,7 +64,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:text='@{"Place : " + item.place}'
+        android:text='@{"Place : " + viewModel.selectedConcertItem.place}'
         tools:text="Place : "
         android:textSize="16sp"/>
 
@@ -73,7 +82,7 @@
             android:id="@+id/tv_start_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:date="@{item.startDate}"
+            app:date="@{viewModel.selectedConcertItem.startDate}"
             android:textSize="16sp"/>
     </LinearLayout>
 
@@ -91,7 +100,7 @@
             android:id="@+id/tv_end_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:date="@{item.endDate}"
+            app:date="@{viewModel.selectedConcertItem.endDate}"
             android:textSize="16sp"/>
     </LinearLayout>
 

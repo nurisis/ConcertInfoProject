@@ -12,13 +12,14 @@ import okhttp3.ResponseBody
 import java.io.IOException
 import java.lang.Exception
 import androidx.databinding.adapters.NumberPickerBindingAdapter.setValue
+import com.secondhands.navigationexamproject.entity.ConcertItem
 import io.reactivex.Single
 
-class GetConcertsUseCase(
+class DeleteBookMarkUseCase(
     private val concertRepository: ConcertRepository
 ) {
-    suspend operator fun invoke() : Result<ApiResponse> {
-        return concertRepository.getConcerts()
+    suspend operator fun invoke(item: ConcertItem){
+        concertRepository.deleteBookMark(item = item)
     }
 
 }
