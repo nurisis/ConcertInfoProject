@@ -69,14 +69,12 @@ dependencies {
 //    testImplementation "org.koin:koin-test:$koin_version"
 //    // Koin for Java developers
 //    implementation "org.koin:koin-java:$koin_version"
-
     // Koin AndroidX Scope features
 //    implementation "org.koin:koin-androidx-scope:$koin_version"
 
     // retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
-//    implementation "com.squareup.retrofit2:converter-scalars:$retrofit_version"
     implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-simplexml:$retrofit_version"
 
