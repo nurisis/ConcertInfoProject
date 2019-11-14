@@ -3,7 +3,7 @@
     <data>
         <variable
             name="viewmodel"
-            type="com.secondhands.concertinfoproject.ui.ConcertViewModel" />
+            type="com.nurisis.concertinfoproject.ui.ConcertViewModel" />
     </data>
 <androidx.core.widget.NestedScrollView
     android:id="@+id/scrollView"

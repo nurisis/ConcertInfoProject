@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/frag_main"
-        android:name="com.secondhands.concertinfoproject.ui.MainFragment"
+        android:name="com.nurisis.concertinfoproject.ui.MainFragment"
         android:label="Main Page"
         tools:layout="@layout/main_fragment">
         <action
@@ -21,7 +21,7 @@
 
     <fragment
         android:id="@+id/frag_list"
-        android:name="com.secondhands.concertinfoproject.ui.ConcertListFragment"
+        android:name="com.nurisis.concertinfoproject.ui.ConcertListFragment"
         android:label="List Page"
         tools:layout="@layout/fragment_concert_list">
         <action
@@ -47,7 +47,7 @@
 
     <fragment
         android:id="@+id/concertDetailFragment"
-        android:name="com.secondhands.concertinfoproject.ui.ConcertDetailFragment"
+        android:name="com.nurisis.concertinfoproject.ui.ConcertDetailFragment"
         android:label="ConcertDetailFragment" >
     </fragment>
 

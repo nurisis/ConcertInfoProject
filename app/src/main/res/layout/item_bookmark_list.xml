@@ -5,7 +5,7 @@
     <data>
         <variable
             name="item"
-            type="com.secondhands.concertinfoproject.entity.ConcertItem" />
+            type="com.nurisis.concertinfoproject.entity.ConcertItem" />
     </data>
 
 <RelativeLayout
