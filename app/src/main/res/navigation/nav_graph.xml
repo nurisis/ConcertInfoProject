@@ -9,7 +9,7 @@
         android:id="@+id/frag_main"
         android:name="com.nurisis.concertinfoproject.ui.MainFragment"
         android:label="Main Page"
-        tools:layout="@layout/main_fragment">
+        tools:layout="@layout/fragment_main">
         <action
             android:id="@+id/action_frag_main_to_concertDetailFragment"
             app:destination="@id/concertDetailFragment"

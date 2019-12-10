@@ -7,7 +7,7 @@ apply plugin: "androidx.navigation.safeargs"
 android {
     compileSdkVersion 29
     defaultConfig {
-        applicationId "com.nurisis.navigationexamproject"
+        applicationId "com.nurisis.concertinfoproject"
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
@@ -17,7 +17,18 @@ android {
         multiDexEnabled true
     }
     buildTypes {
+        debug {
+            // Activation of R8
+            minifyEnabled false
+            // Default proguard setting
+            proguardFile getDefaultProguardFile('proguard-android-optimize.txt')
+            // Proguard setting required for the project
+            proguardFile 'proguard-rules.pro'
+            // Proguard setting required for the debug
+            proguardFile 'proguard-debug.pro'
+        }
         release {
+            // Activation of R8
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
